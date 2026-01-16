@@ -50,6 +50,82 @@ sudo apt install qt6-base-dev cmake g++
 sudo pacman -S qt6-base cmake gcc
 ```
 
+### Nix / NixOS
+
+This project provides first-class support for Nix and NixOS.
+
+#### Optional: Setup Cachix (Faster Installation)
+To avoid building from source, use the `sda-qt6` binary cache:
+
+```bash
+# Install cachix if not already installed
+nix-env -iA cachix -f https://cachix.org/api/v1/install
+
+# Add the sda-qt6 cache
+cachix use sda-qt6
+```
+
+Or add it directly to your **NixOS configuration**:
+```nix
+{
+  nix.settings = {
+    substituters = [ "https://sda-qt6.cachix.org" ];
+    trusted-public-keys = [ "sda-qt6.cachix.org-1:f+mZPJwYQKpzaAdGWj2DfdHV5uEjnYx1ZoAWfZfEGoA=" ];
+  };
+}
+```
+
+#### Using Nix Flakes (Recommended)
+
+**1. Ad-hoc Usage**
+```bash
+# Run directly without installing
+nix run github:THShafi170/selectdefaultapplication-Qt6
+```
+
+**2. Permanent Installation**
+```bash
+nix profile install github:THShafi170/selectdefaultapplication-Qt6
+```
+
+**3. Declarative (NixOS / Home Manager)**
+Add to your `flake.nix` inputs:
+```nix
+inputs.sda-qt6.url = "github:THShafi170/selectdefaultapplication-Qt6";
+```
+Then add it to your packages:
+```nix
+environment.systemPackages = [ inputs.sda-qt6.packages.${system}.default ];
+```
+
+**4. Development Shell**
+```bash
+nix develop
+```
+
+#### Using Legacy Nix
+
+**1. Permanent Installation**
+```bash
+nix-env -i -f .
+```
+
+**2. Declarative (NixOS)**
+Add to your `configuration.nix`:
+```nix
+{ pkgs, ... }:
+let
+  sda-qt6 = import (fetchTarball "https://github.com/THShafi170/selectdefaultapplication-Qt6/archive/master.tar.gz") { inherit pkgs; };
+in {
+  environment.systemPackages = [ sda-qt6 ];
+}
+```
+
+**3. Development Environment**
+```bash
+nix-shell
+```
+
 ### Building from Source
 
 1.  **Clone the repository**:
