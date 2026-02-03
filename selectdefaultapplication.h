@@ -31,6 +31,8 @@ private slots:
 	void constrictGroup(QAction *action);
 	void enableSetDefaultButton();
 	void onRemoveDefaultClicked();
+	void selectAllMimeTypes();
+	void deselectAllMimeTypes();
 
 private:
 	void setDefault(const QString &appName, QSet<QString> &mimetypes);
@@ -68,6 +70,8 @@ private:
 	QMenu *m_mimegroupMenu;
 	QPushButton *m_setDefaultButton;
 	QPushButton *m_removeDefaultButton;
+	QPushButton *m_selectAllButton;
+	QPushButton *m_deselectAllButton;
 	QToolButton *m_infoButton;
 	QLabel *m_middleBanner;
 	QLabel *m_rightBanner;

@@ -136,9 +136,19 @@ SelectDefaultApplication::SelectDefaultApplication(QWidget *parent, bool isVerbo
 	m_setDefaultButton = new QPushButton(tr("Add association(s)"));
 	m_setDefaultButton->setEnabled(false);
 
+	m_selectAllButton = new QPushButton(tr("Select All"));
+	m_deselectAllButton = new QPushButton(tr("Deselect All"));
+
 	QVBoxLayout *middleLayout = new QVBoxLayout;
 	middleLayout->addWidget(m_middleBanner);
 	middleLayout->addWidget(m_mimetypeList);
+
+	QHBoxLayout *mimeSelectionButtons = new QHBoxLayout;
+	mimeSelectionButtons->addWidget(m_selectAllButton);
+	mimeSelectionButtons->addWidget(m_deselectAllButton);
+	mimeSelectionButtons->addStretch();
+	middleLayout->addLayout(mimeSelectionButtons);
+
 	middleLayout->addWidget(m_setDefaultButton);
 
 	// Right section
@@ -156,6 +166,10 @@ SelectDefaultApplication::SelectDefaultApplication(QWidget *parent, bool isVerbo
 	QVBoxLayout *rightLayout = new QVBoxLayout;
 	rightLayout->addWidget(m_rightBanner);
 	rightLayout->addWidget(m_currentDefaultApps);
+
+	// Add spacing to align with the 'Add association(s)' button which is pushed down by the Select All buttons
+	rightLayout->addItem(new QSpacerItem(0, m_selectAllButton->sizeHint().height() + middleLayout->spacing()));
+
 	rightLayout->addWidget(m_removeDefaultButton);
 
 	// Main layout and connections
@@ -175,6 +189,8 @@ SelectDefaultApplication::SelectDefaultApplication(QWidget *parent, bool isVerbo
 	connect(m_infoButton, &QToolButton::clicked, this, &SelectDefaultApplication::showHelp);
 	connect(m_searchBox, &QLineEdit::textEdited, this, &SelectDefaultApplication::populateApplicationList);
 	connect(m_mimegroupMenu, &QMenu::triggered, this, &SelectDefaultApplication::constrictGroup);
+	connect(m_selectAllButton, &QPushButton::clicked, this, &SelectDefaultApplication::selectAllMimeTypes);
+	connect(m_deselectAllButton, &QPushButton::clicked, this, &SelectDefaultApplication::deselectAllMimeTypes);
 
 	// Set a reasonable default window size
 	resize(1000, 600);
@@ -491,6 +507,18 @@ void SelectDefaultApplication::constrictGroup(QAction *action)
 	m_searchBox->clear();
 	populateApplicationList("");
 	onApplicationSelected();
+}
+
+void SelectDefaultApplication::selectAllMimeTypes()
+{
+	m_mimetypeList->selectAll();
+	enableSetDefaultButton();
+}
+
+void SelectDefaultApplication::deselectAllMimeTypes()
+{
+	m_mimetypeList->clearSelection();
+	enableSetDefaultButton();
 }
 
 void SelectDefaultApplication::enableSetDefaultButton()

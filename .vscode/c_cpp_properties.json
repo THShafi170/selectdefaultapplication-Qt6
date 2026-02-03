@@ -3,26 +3,14 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/include/qt6/QtCore",
-                "/usr/include/qt6",
-                "/usr/include/qt6/QtWidgets",
-                "/usr/include/qt6/QtGui"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
+            "compilerPath": "/usr/bin/c++",
             "cStandard": "c17",
-            "cppStandard": "c++20",
-            "intelliSenseMode": "linux-clang-x64",
-            "compilerArgs": [],
-            "mergeConfigurations": false,
-            "browse": {
-                "path": [
-                    "${workspaceFolder}/**",
-                    "/usr/include/qt6/QtCore"
-                ],
-                "limitSymbolsToIncludedHeaders": true
-            }
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         }
     ],
     "version": 4

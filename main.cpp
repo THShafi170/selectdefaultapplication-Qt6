@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
 	if (!isGui) {
 		QCoreApplication a(argc, argv);
-		a.setApplicationVersion("2.0");
+		a.setApplicationVersion("2.1");
 		a.setApplicationName("Select Default Application"); // Console apps use Name usually
 
 		QCommandLineParser parser;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 	}
 
 	QApplication a(argc, argv);
-	a.setApplicationVersion("2.0");
+	a.setApplicationVersion("2.1");
 	a.setApplicationDisplayName("Select Default Application");
 
 	QCommandLineParser parser;

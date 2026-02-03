@@ -1,35 +1,47 @@
-# C++
-*.d
-*.o
-*.obj
-*.exe
-
-# Cache directories
-.cache/
+# CMake
+build/
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+*.ninja
+install_manifest.txt
+compile_commands.json
+.cmake/
 
 # Qt
 *.user
 *.user.*
 *.qmake.stash
-moc_*.cpp
-qrc_*.cpp
-ui_*.h
-Makefile*
+*.qch
 
-# CMake
-/build/
-CMakeFiles/
-CMakeCache.txt
-CMakeScripts/
-cmake_install.cmake
-install_manifest.txt
-*.cmake
-!CMakeLists.txt
-Testing/
-*.ninja
+# C++
+*.d
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
 
-# IDEs
-.vscode/
+# IDE & Editors
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/c_cpp_properties.json
+!.vscode/settings.json
 .idea/
 *.swp
 *~
+*.DS_Store
+
+# Nix
+result
+result-*
+.cache/
